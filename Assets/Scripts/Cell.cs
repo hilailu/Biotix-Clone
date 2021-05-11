@@ -4,35 +4,51 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
+using UnityEngine.UI;
+using System.Linq;
+
+public enum Owner
+{
+    None,
+    Player,
+    Bot,
+}
 
 public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    public uint value;
+    public int value;
+    public Owner owner;
+    public LineRenderer lineRend;
+    public SpriteRenderer selectRing;
 
-    [SerializeField] private uint maxvalue;
-    [SerializeField] private bool isCaptured;
+    [SerializeField] private int maxvalue;
+
+    private CellColor cellColor;
 
     private bool isAddCoroutineRunning = false;
     private bool isRemoveCoroutineRunning = false;
 
     private TMP_Text val;
-    private LineRenderer lineRend;
     private Vector2 startPos;
     private Vector2 endPos;
+
+    private float UniqueId { get; set; }
+
+    public float GetId()
+        => this.UniqueId;
 
     private void Start()
     {
         lineRend = GetComponent<LineRenderer>();
         val = GetComponent<TMP_Text>();
+        cellColor = GetComponentInChildren<CellColor>();
 
-        if (maxvalue == 50)
-            value = 0;
-        else
-            value = maxvalue;
+        UniqueId = transform.position.sqrMagnitude;
+
+        CellManager.instance.cells.Add(this);
 
         ValueText();
-
-        bool result = value == 60 ? isCaptured = true : isCaptured = false;
+        cellColor.SetColor(owner);
     }
 
     private void Update()
@@ -58,64 +74,141 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     private void ValueText()
     {
         if (value != 0)
-            val.text = value.ToString();
+            val.text = Math.Abs(value).ToString();
         else
             val.text = string.Empty;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>() != null)
+        var cell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
+        if (cell != null)
             Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
 
-        endPos = eventData.pointerCurrentRaycast.worldPosition;
-        lineRend.SetPosition(0, new Vector3(startPos.x, startPos.y, 0f));
-        lineRend.SetPosition(1, new Vector3(endPos.x, endPos.y, 0f));
+        if (startPos != Vector2.zero)
+        {
+            endPos = eventData.pointerCurrentRaycast.worldPosition;
+            lineRend.SetPosition(0, new Vector3(startPos.x, startPos.y, 0f));
+            lineRend.SetPosition(1, new Vector3(endPos.x, endPos.y, 0f));
+
+            if (cell != null && cell.owner == Owner.Player && !CellManager.instance.selectedCells.Contains(cell))
+            {
+                cell.selectRing.enabled = true;
+                CellManager.instance.selectedCells.Add(cell);
+            }
+
+            foreach (Cell item in CellManager.instance.selectedCells)
+            {
+                item.lineRend.SetPosition(0, new Vector3(item.transform.position.x, item.transform.position.y, 0f));
+                item.lineRend.SetPosition(1, new Vector3(endPos.x, endPos.y, 0f));
+            }
+
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        lineRend.positionCount = 2;
-        startPos = eventData.pointerCurrentRaycast.worldPosition;
-        Debug.Log("You started dragging. Start pos: " + startPos);
+        var cell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
+        if (cell != null && cell.owner == Owner.Player)
+        {
+            cell.selectRing.enabled = true;
+            lineRend.positionCount = 2;
+            startPos = eventData.pointerCurrentRaycast.worldPosition;
+            Debug.Log("You started dragging. Start pos: " + startPos);
+        }
+        else
+        {
+            lineRend.positionCount = 0;
+            startPos = Vector2.zero;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        var cell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
-        if (cell == null)
-            lineRend.positionCount = 0;
-        else
+        if (startPos != Vector2.zero)
         {
-            uint transferred = Convert.ToUInt32(Math.Floor((float)value / 2));
-            cell.value +=  transferred;
-            this.value -= transferred;
+            var cell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
+            if (cell != null)
+            {
+                int startVal = cell.value;
+
+                int transferred = 0;
+
+                foreach (Cell item in CellManager.instance.selectedCells)
+                {
+                    int cellTransfer = Convert.ToInt32(Math.Floor((float)item.value / 2));
+                    transferred += cellTransfer;
+                    item.value -= cellTransfer;
+                }
+
+                if (cell.owner == Owner.Bot)
+                {
+                    if (transferred >= cell.value)
+                    {
+                        var diff = transferred - cell.value;
+                        cell.value = diff;
+                    }
+                    else
+                        cell.value -= transferred;
+                }
+                else cell.value += transferred;
+
+                if (cell.value > 0 && transferred > startVal)
+                {
+                    cell.owner = this.owner;
+                    cell.GetComponentInChildren<CellColor>().SetColor(cell.owner);
+                }
+                if (cell.value == 0)
+                    cell.owner = Owner.None;
+
+
+                foreach (Cell item in CellManager.instance.selectedCells)
+                {
+                    item.selectRing.enabled = false;
+                    item.lineRend.positionCount = 0;
+                    item.lineRend.positionCount = 2;
+                }
+                CellManager.instance.selectedCells.Clear();
+            }
+            
+            if (CellManager.instance.selectedCells.Count() > 0)
+            {
+                foreach (Cell item in CellManager.instance.selectedCells)
+                {
+                    item.lineRend.positionCount = 0;
+                    item.lineRend.positionCount = 2;
+                }
+            }
+            
+            Debug.Log("You ended a drag");
         }
-        Debug.Log("You ended a drag");
     }
 
 
 
     private IEnumerator AddRoutine()
     {
-        isAddCoroutineRunning = true;
-        for (uint i = value; i < maxvalue; i++)
+        if (owner != Owner.None)
         {
-            value++;
-            ValueText();
-            yield return new WaitForSeconds(1f);
+            isAddCoroutineRunning = true;
+            for (int i = value; i < maxvalue; i++)
+            {               
+                yield return new WaitForSeconds(1f);
+                value++;
+                ValueText();
+            }
+            isAddCoroutineRunning = false;
         }
-        isAddCoroutineRunning = false;
     }
 
     private IEnumerator RemoveRoutine()
     {
         isRemoveCoroutineRunning = true;
-        for (uint i = value; i > maxvalue; i = i - 2)
-        {
+        for (int i = value; i > maxvalue; i = i - 2)
+        {         
+            yield return new WaitForSeconds(1f);
             value = value - 2;
             ValueText();
-            yield return new WaitForSeconds(0.5f);
         }
         isRemoveCoroutineRunning = false;
     }
