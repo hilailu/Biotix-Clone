@@ -1,0 +1,123 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.6f1 (338bb68529b2) revision 3378102'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19042.928; Version 2009; 64bit' Language: 'ru' Physical Memory: 11741 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker4
+-projectPath
+D:/GitProjects/Biotix Clone
+-logFile
+Logs/AssetImportWorker4.log
+-srvPort
+55543
+Successfully changed project path to: D:/GitProjects/Biotix Clone
+D:/GitProjects/Biotix Clone
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 139.34 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.6f1 (338bb68529b2)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/GitProjects/Biotix Clone/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon R7 Graphics (ID=0x9874)
+    Vendor:   
+    VRAM:     5870 MB
+    Driver:   27.20.14501.28009
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56884
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.007312 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 113.40 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  7.977 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.002385 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 103.05 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.922 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.66 seconds
+Refreshing native plugins compatible for Editor in 1.10 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1859 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 89.6 MB.
+System memory in use after: 89.5 MB.
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 2308.
+Total: 5.150700 ms (FindLiveObjects: 0.492800 ms CreateObjectMapping: 0.154300 ms MarkObjects: 4.112800 ms  DeleteObjects: 0.386400 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Prefabs/Cell 15.prefab
+  artifactKey: Guid(e67e4d8cd29c1b748b4d511ad4a93e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Cell 15.prefab using Guid(e67e4d8cd29c1b748b4d511ad4a93e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2fa669fc9e9e8b3a4be554920bc38ccd') in 0.630874 seconds
+  Import took 0.653522 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000666 seconds.
+  path: Assets/Prefabs/Cell 10.prefab
+  artifactKey: Guid(135404fe3fcf76e49bafecd193c39284) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Cell 10.prefab using Guid(135404fe3fcf76e49bafecd193c39284) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '127185ea609302d423ee9aabbad5537c') in 0.123805 seconds
+  Import took 0.142817 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000391 seconds.
+  path: Assets/Prefabs/Cell 5.prefab
+  artifactKey: Guid(9c31ec11f3f3e16409ad20b76b1f721c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Cell 5.prefab using Guid(9c31ec11f3f3e16409ad20b76b1f721c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4df3dbbde74d8ce1fad486f0603d047a') in 0.123123 seconds
+  Import took 0.156933 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.030201 seconds.
+  path: Assets/Prefabs/Cell 5.prefab
+  artifactKey: Guid(9c31ec11f3f3e16409ad20b76b1f721c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Cell 5.prefab using Guid(9c31ec11f3f3e16409ad20b76b1f721c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4df3dbbde74d8ce1fad486f0603d047a') in 0.106599 seconds
+  Import took 0.117150 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002127 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.99 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.949 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(9) subTarget(16777218) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 1.20 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1844 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 91.2 MB.
+System memory in use after: 91.1 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2319.
+Total: 8.093200 ms (FindLiveObjects: 0.715900 ms CreateObjectMapping: 0.798500 ms MarkObjects: 6.239100 ms  DeleteObjects: 0.334800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000

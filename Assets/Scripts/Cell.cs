@@ -32,6 +32,8 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     private Vector2 startPos;
     private Vector2 endPos;
 
+    private Coroutine coAdd, coRem;
+
     private float UniqueId { get; set; }
 
     public float GetId()
@@ -53,21 +55,31 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     private void Update()
     {
-        //if (isAddCoroutineRunning) return;
-
         ValueText();
 
-        //if (isCaptured)
+        if (owner != Owner.None)
         {
             if (value == maxvalue) return;
 
-            if (value < maxvalue)
-                if (!isAddCoroutineRunning)
-                    StartCoroutine(AddRoutine());
+            if (value < maxvalue && !isAddCoroutineRunning)
+            {
+                if (coRem != null)
+                {
+                    StopCoroutine(coRem);
+                    isRemoveCoroutineRunning = false;
+                }
+                coAdd = StartCoroutine(AddRoutine());
+            }
 
-            if (value > maxvalue)
-                if (!isRemoveCoroutineRunning)
-                    StartCoroutine(RemoveRoutine());
+            if (value > maxvalue && !isRemoveCoroutineRunning)
+            {
+                if (coAdd != null)
+                {
+                    StopCoroutine(coAdd);
+                    isAddCoroutineRunning = false;
+                }
+                coRem = StartCoroutine(RemoveRoutine());
+            }
         }
     }
 
@@ -81,15 +93,13 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
-        var cell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
+        var cell = eventData.pointerCurrentRaycast.gameObject?.GetComponent<Cell>();
         if (cell != null)
             Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
 
         if (startPos != Vector2.zero)
         {
             endPos = eventData.pointerCurrentRaycast.worldPosition;
-            lineRend.SetPosition(0, new Vector3(startPos.x, startPos.y, 0f));
-            lineRend.SetPosition(1, new Vector3(endPos.x, endPos.y, 0f));
 
             if (cell != null && cell.owner == Owner.Player && !CellManager.instance.selectedCells.Contains(cell))
             {
@@ -112,13 +122,13 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (cell != null && cell.owner == Owner.Player)
         {
             cell.selectRing.enabled = true;
-            lineRend.positionCount = 2;
+            cell.lineRend.positionCount = 2;
             startPos = eventData.pointerCurrentRaycast.worldPosition;
             Debug.Log("You started dragging. Start pos: " + startPos);
         }
-        else
+        else if (cell != null)
         {
-            lineRend.positionCount = 0;
+            cell.lineRend.positionCount = 0;
             startPos = Vector2.zero;
         }
     }
@@ -130,55 +140,10 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             var cell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
             if (cell != null)
             {
-                int startVal = cell.value;
-
-                int transferred = 0;
-
-                foreach (Cell item in CellManager.instance.selectedCells)
-                {
-                    int cellTransfer = Convert.ToInt32(Math.Floor((float)item.value / 2));
-                    transferred += cellTransfer;
-                    item.value -= cellTransfer;
-                }
-
-                if (cell.owner == Owner.Bot)
-                {
-                    if (transferred >= cell.value)
-                    {
-                        var diff = transferred - cell.value;
-                        cell.value = diff;
-                    }
-                    else
-                        cell.value -= transferred;
-                }
-                else cell.value += transferred;
-
-                if (cell.value > 0 && transferred > startVal)
-                {
-                    cell.owner = this.owner;
-                    cell.GetComponentInChildren<CellColor>().SetColor(cell.owner);
-                }
-                if (cell.value == 0)
-                    cell.owner = Owner.None;
-
-
-                foreach (Cell item in CellManager.instance.selectedCells)
-                {
-                    item.selectRing.enabled = false;
-                    item.lineRend.positionCount = 0;
-                    item.lineRend.positionCount = 2;
-                }
-                CellManager.instance.selectedCells.Clear();
+                CellManager.instance.Attack(this.owner, cell);
             }
-            
-            if (CellManager.instance.selectedCells.Count() > 0)
-            {
-                foreach (Cell item in CellManager.instance.selectedCells)
-                {
-                    item.lineRend.positionCount = 0;
-                    item.lineRend.positionCount = 2;
-                }
-            }
+
+            CellManager.instance.Clear();
             
             Debug.Log("You ended a drag");
         }
@@ -195,7 +160,6 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             {               
                 yield return new WaitForSeconds(1f);
                 value++;
-                ValueText();
             }
             isAddCoroutineRunning = false;
         }
@@ -208,7 +172,6 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {         
             yield return new WaitForSeconds(1f);
             value = value - 2;
-            ValueText();
         }
         isRemoveCoroutineRunning = false;
     }

@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 7545427920868100641}
   m_Layer: 5
   m_Name: Cell 15
-  m_TagString: Untagged
+  m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   owner: 0
   lineRend: {fileID: 0}
   selectRing: {fileID: 4814082249377318206}
-  maxvalue: 15
+  maxvalue: 30
 --- !u!23 &8137589011925585152
 MeshRenderer:
   m_ObjectHideFlags: 0
