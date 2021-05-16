@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 7317146904405512945}
   m_Layer: 5
   m_Name: Cell 10
-  m_TagString: Cell
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

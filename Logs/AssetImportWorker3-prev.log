@@ -1,0 +1,354 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.6f1 (338bb68529b2) revision 3378102'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19042.985; Version 2009; 64bit' Language: 'ru' Physical Memory: 11741 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker3
+-projectPath
+D:/GitProjects/Biotix Clone
+-logFile
+Logs/AssetImportWorker3.log
+-srvPort
+56612
+Successfully changed project path to: D:/GitProjects/Biotix Clone
+D:/GitProjects/Biotix Clone
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 268.35 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.6f1 (338bb68529b2)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/GitProjects/Biotix Clone/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon R7 Graphics (ID=0x9874)
+    Vendor:   
+    VRAM:     5870 MB
+    Driver:   27.20.14501.28009
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56424
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.008848 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 184.85 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in 10.408 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004058 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 94.30 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  8.186 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.23 seconds
+Refreshing native plugins compatible for Editor in 1.10 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1859 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 89.5 MB.
+System memory in use after: 89.4 MB.
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 2308.
+Total: 6.236200 ms (FindLiveObjects: 0.752700 ms CreateObjectMapping: 0.266700 ms MarkObjects: 4.833200 ms  DeleteObjects: 0.379800 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Scripts/CellManager.cs
+  artifactKey: Guid(8e5ed49b418a5624b96706edaa358d4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/CellManager.cs using Guid(8e5ed49b418a5624b96706edaa358d4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dd09cfb41f00fd71cd7b4d617cab98e') in 0.393239 seconds
+  Import took 0.399778 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1383.627073 seconds.
+  path: Assets/Scripts/CellManager.cs
+  artifactKey: Guid(8e5ed49b418a5624b96706edaa358d4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/CellManager.cs using Guid(8e5ed49b418a5624b96706edaa358d4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69895d93070d589eeba8539f8f7bc25a') in 0.031630 seconds
+  Import took 0.112697 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.197250 seconds.
+  path: Assets/Scripts/CellManager.cs
+  artifactKey: Guid(8e5ed49b418a5624b96706edaa358d4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/CellManager.cs using Guid(8e5ed49b418a5624b96706edaa358d4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69895d93070d589eeba8539f8f7bc25a') in 0.031525 seconds
+  Import took 0.769254 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002319 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.00 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.315 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(9) subTarget(16777218) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.92 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1844 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 88.0 MB.
+System memory in use after: 87.9 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2312.
+Total: 7.981700 ms (FindLiveObjects: 0.607000 ms CreateObjectMapping: 0.262800 ms MarkObjects: 6.830100 ms  DeleteObjects: 0.277000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002210 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.98 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  6.025 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(9) subTarget(16777218) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 1.15 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1844 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 88.0 MB.
+System memory in use after: 88.0 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2316.
+Total: 5.443700 ms (FindLiveObjects: 0.524100 ms CreateObjectMapping: 0.151300 ms MarkObjects: 4.480800 ms  DeleteObjects: 0.283000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 410.185424 seconds.
+  path: Assets/Sprites/minicell.png
+  artifactKey: Guid(2bdf8222cf854924ba27629ddc538fea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/minicell.png using Guid(2bdf8222cf854924ba27629ddc538fea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1acceefc489c7a007595dd186a8dad21') in 0.611011 seconds
+  Import took 0.652099 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 151.329066 seconds.
+  path: Assets/Sprites/minicell.png
+  artifactKey: Guid(2bdf8222cf854924ba27629ddc538fea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/minicell.png using Guid(2bdf8222cf854924ba27629ddc538fea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e71d13f21cf80ce2ee40879fb9c8d802') in 0.056804 seconds
+  Import took 0.227238 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 121.563082 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4d8ab1786ad9feaf1ab60c22d5e86bb') in 0.378352 seconds
+  Import took 0.405592 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002738 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.92 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.743 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(9) subTarget(16777218) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 1.21 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1844 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 91.1 MB.
+System memory in use after: 91.1 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2329.
+Total: 5.077400 ms (FindLiveObjects: 0.525700 ms CreateObjectMapping: 0.181600 ms MarkObjects: 4.073200 ms  DeleteObjects: 0.293100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 1261.407105 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9609f499e0c3b10fde228eafe644aa5e') in 0.186743 seconds
+  Import took 0.220052 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.056119 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f39a22b42a64f8d4c453260544a865d') in 0.055183 seconds
+  Import took 0.064043 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.009686 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f39a22b42a64f8d4c453260544a865d') in 0.058950 seconds
+  Import took 0.068926 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.328753 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '237cb6c394899776fc26dc4069849ad5') in 0.060371 seconds
+  Import took 0.070310 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.578235 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00bb41b38295d2f60b4b22575b6170d9') in 0.045248 seconds
+  Import took 0.053996 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.621136 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0f10a913572e2e0297df24af96b9dfd') in 0.044286 seconds
+  Import took 0.051814 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.104671 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a34da52e1f845936ad1e06fbf91efe0') in 0.053662 seconds
+  Import took 0.103265 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.662370 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d288f319145c440a456e968f82ecf20') in 0.043022 seconds
+  Import took 0.064166 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.363550 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd55da00fe76ebac494bd429f2cce0601') in 0.038094 seconds
+  Import took 0.191197 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.394246 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f2766dcf85f6111deaac292bf57b9da') in 0.037453 seconds
+  Import took 0.044801 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.866679 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd74443d38bedd316b83016a1a9d352ea') in 0.043875 seconds
+  Import took 0.153840 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.439913 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2567c77a5d92a5973adddf56c77ab51') in 0.038253 seconds
+  Import took 0.047732 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.576345 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2da650d13c84f5570bd00e98dbaa3671') in 0.198372 seconds
+  Import took 0.318166 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.115539 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '143f46d5304cfa4ae1a37cf90ee9b34c') in 0.061395 seconds
+  Import took 0.173409 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.983536 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f8f8c9e9d3ce68360ac7a2a646bfd21') in 0.051318 seconds
+  Import took 0.239974 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.235275 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d1bc183a8e667655e31aaf2c3b3f95f') in 0.049041 seconds
+  Import took 0.057763 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.438586 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53775b3c8596c1a8b76a2e3e5f0f3f16') in 0.080224 seconds
+  Import took 0.612827 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.619240 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5be0d5f36bc691a289bf4c9b4fb97bf9') in 0.059176 seconds
+  Import took 0.226568 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.960408 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8821f96446b602f67d25dbdcc494faac') in 0.049017 seconds
+  Import took 0.058087 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.369764 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9be85154e749e7d55cc45dd4bff9bcb') in 0.056842 seconds
+  Import took 0.069504 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.366634 seconds.
+  path: Assets/Prefabs/MiniCell.prefab
+  artifactKey: Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/MiniCell.prefab using Guid(a3d396e3216334643aff5b40cc3bb454) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ced10bf595415cb67f8dbd39bb1d12a8') in 0.043733 seconds
+  Import took 0.069909 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

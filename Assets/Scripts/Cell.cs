@@ -14,7 +14,7 @@ public enum Owner
     Bot,
 }
 
-public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
     public int value;
     public Owner owner;
@@ -94,8 +94,6 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public void OnDrag(PointerEventData eventData)
     {
         var cell = eventData.pointerCurrentRaycast.gameObject?.GetComponent<Cell>();
-        if (cell != null)
-            Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
 
         if (startPos != Vector2.zero)
         {
@@ -149,6 +147,38 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         }
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Cell touchedCell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
+        if (touchedCell.owner == Owner.Player)
+        {
+            if (!CellManager.instance.selectedCells.Contains(touchedCell))
+            {
+                CellManager.instance.selectedCells.Add(touchedCell);
+                touchedCell.selectRing.enabled = true;
+                Debug.Log("Cell selected");
+            }
+            else if (CellManager.instance.selectedCells.Contains(touchedCell) && CellManager.instance.selectedCells.Count > 1)
+            {
+                CellManager.instance.Attack(CellManager.instance.selectedCells[0].owner, touchedCell);
+                CellManager.instance.Clear();
+                Debug.Log("Attacking your own cell");
+            }
+        }
+        if (touchedCell.owner != Owner.Player && CellManager.instance.selectedCells.Count > 0)
+        {
+            CellManager.instance.Attack(CellManager.instance.selectedCells[0].owner, touchedCell);
+            CellManager.instance.Clear();
+            Debug.Log("Attacking different cell");
+        }
+    }
+
+
+    public void Attack(Cell attacked)
+    {
+        int transferred = Convert.ToInt32(Math.Floor((float)this.value / 2));
+        int amountOfMiniCells = Convert.ToInt32(Math.Floor((float)transferred / 2));
+    }
 
 
     private IEnumerator AddRoutine()

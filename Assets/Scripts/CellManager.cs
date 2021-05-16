@@ -20,74 +20,8 @@ public class CellManager : MonoBehaviour
     public List<Cell> cells = new List<Cell>();
     public List<Cell> selectedCells = new List<Cell>();
 
-    private Vector2 touchPosition;
-    private EventSystem system;
-
+    [SerializeField] private GameObject miniCell;
     [SerializeField] private Camera main;
-
-    void Start()
-    {
-        system = EventSystem.current;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            touchPosition = Input.GetTouch(0).position;
-
-            var pointerEventData = new PointerEventData(system) { position = touchPosition };
-            var raycastResults = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerEventData, raycastResults);
-
-            if (raycastResults.Count > 0)
-            {
-                foreach (var result in raycastResults)
-                {
-                    if (result.gameObject.CompareTag("Cell"))
-                    {
-                        Cell touchedCell = result.gameObject.GetComponent<Cell>();
-                        if (touchedCell.owner == Owner.Player)
-                        {
-                            if (!selectedCells.Contains(touchedCell))
-                            {
-                                selectedCells.Add(touchedCell);
-                                touchedCell.selectRing.enabled = true;
-                                Debug.Log("Cell selected");
-                            }
-                            else if (selectedCells.Contains(touchedCell) && selectedCells.Count > 1)
-                            {
-                                Attack(selectedCells[0].owner, touchedCell);
-                                Clear();
-                                Debug.Log("Attacking your own cell");
-                            }
-                        }
-                        if (touchedCell.owner != Owner.Player && selectedCells.Count > 0)
-                        {
-                            Attack(selectedCells[0].owner, touchedCell);
-                            Clear();
-                            Debug.Log("Attacking different cell");
-                        }
-                        return;
-                    }
-
-                    else if (result.gameObject.CompareTag("BG") && selectedCells.Count > 0)
-                    {
-
-                        foreach (Cell cell in selectedCells)
-                        {
-                            cell.selectRing.enabled = false;
-                        }
-                        selectedCells.Clear();
-
-                        Debug.Log("you touched background and cleared selected cells");
-                    }
-                }
-            }
-            
-        }
-    }
 
     public void Attack(Owner owner, Cell damaged)
     {
@@ -116,15 +50,24 @@ public class CellManager : MonoBehaviour
 
         var cellColor = damaged.GetComponentInChildren<CellColor>();
 
-        if (damaged.value > 0 && transferred > startVal)
+        if (transferred > startVal && damaged.value > 0)
         {
             damaged.owner = owner;
             cellColor.SetColor(damaged.owner);
         }
+
         if (damaged.value == 0)
         {
-            damaged.owner = Owner.None;
+           damaged.owner = Owner.None;
            cellColor.SetColor(damaged.owner);
+        }
+    }
+
+    public void Attack2(Cell attacked)
+    {
+        foreach (Cell cell in selectedCells)
+        {
+            cell.Attack(attacked);
         }
     }
 
@@ -138,7 +81,6 @@ public class CellManager : MonoBehaviour
                 item.lineRend.positionCount = 0;
                 item.lineRend.positionCount = 2;
             }
-
             selectedCells.Clear();
         }
     }

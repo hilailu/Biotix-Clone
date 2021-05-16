@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: -1104980113683617799}
   m_Layer: 5
   m_Name: Cell 5
-  m_TagString: Cell
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa4c05817dd2374883b8e7c96589841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 5
+  value: -5
   owner: 0
   lineRend: {fileID: 0}
   selectRing: {fileID: 1009124700063092092}
