@@ -23,7 +23,7 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     [SerializeField] private int maxvalue;
 
-    private CellColor cellColor;
+    private CellCenter cellColor;
 
     private bool isAddCoroutineRunning = false;
     private bool isRemoveCoroutineRunning = false;
@@ -43,7 +43,7 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         lineRend = GetComponent<LineRenderer>();
         val = GetComponent<TMP_Text>();
-        cellColor = GetComponentInChildren<CellColor>();
+        cellColor = GetComponentInChildren<CellCenter>();
 
         UniqueId = transform.position.sqrMagnitude;
 
@@ -138,7 +138,7 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             var cell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
             if (cell != null)
             {
-                CellManager.instance.Attack(this.owner, cell);
+                CellManager.instance.Attack2(cell);
             }
 
             CellManager.instance.Clear();
@@ -160,14 +160,14 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             }
             else if (CellManager.instance.selectedCells.Contains(touchedCell) && CellManager.instance.selectedCells.Count > 1)
             {
-                CellManager.instance.Attack(CellManager.instance.selectedCells[0].owner, touchedCell);
+                CellManager.instance.Attack2(touchedCell);
                 CellManager.instance.Clear();
                 Debug.Log("Attacking your own cell");
             }
         }
         if (touchedCell.owner != Owner.Player && CellManager.instance.selectedCells.Count > 0)
         {
-            CellManager.instance.Attack(CellManager.instance.selectedCells[0].owner, touchedCell);
+            CellManager.instance.Attack2(touchedCell);
             CellManager.instance.Clear();
             Debug.Log("Attacking different cell");
         }
@@ -178,8 +178,41 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         int transferred = Convert.ToInt32(Math.Floor((float)this.value / 2));
         int amountOfMiniCells = Convert.ToInt32(Math.Floor((float)transferred / 2));
+
+        this.value -= transferred;
+
+        for (int i = 0; i < amountOfMiniCells; i++)
+        {
+            Vector3 rand = this.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f), 0);
+            GameObject mc = Instantiate((GameObject)Resources.Load("MiniCell"), rand, Quaternion.identity, this.transform);
+            MiniCell miniCell = mc.GetComponent<MiniCell>();
+            if (i == amountOfMiniCells - 1 && transferred % 2 == 1)
+            {
+                miniCell.value = 3;
+                return;
+            }
+            miniCell.value = 2;
+            miniCell.owner = this.owner;
+            miniCell.Move(attacked);
+        }
+
     }
 
+    public void IncreaseAmount(Owner owner, int val)
+    {
+        var startVal = this.value;
+
+        if (this.owner != Owner.None && owner != this.owner)
+            this.value -= val;
+        else
+            this.value += val;
+
+        if (val > startVal)
+        {
+            this.owner = owner;
+            this.cellColor.SetColor(owner);
+        }
+    }
 
     private IEnumerator AddRoutine()
     {

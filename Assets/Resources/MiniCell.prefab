@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5382993871934400435}
   - component: {fileID: 4914232097463618234}
   - component: {fileID: 8154978116608278448}
+  - component: {fileID: 6103650578600092393}
   m_Layer: 0
   m_Name: MiniCell
   m_TagString: Untagged
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2bdf8222cf854924ba27629ddc538fea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,3 +100,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0.017813208, y: -0.000021936636}
   m_Size: {x: 0.6866664, y: 0.46128413}
   m_Direction: 1
+--- !u!114 &6103650578600092393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556194048821355951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bebaa4b3c61f4845b9d10d8072036e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0

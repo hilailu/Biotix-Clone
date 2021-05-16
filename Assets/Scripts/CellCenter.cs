@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CellColor : MonoBehaviour
+public class CellCenter : MonoBehaviour
 {
     private SpriteRenderer rend;
     private int level;
 
-    void Start()
+    void Awake()
     {
         level = SceneManager.GetActiveScene().buildIndex;
         rend = GetComponent<SpriteRenderer>();

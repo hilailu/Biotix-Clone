@@ -48,7 +48,7 @@ public class CellManager : MonoBehaviour
         }
         else damaged.value += transferred;
 
-        var cellColor = damaged.GetComponentInChildren<CellColor>();
+        var cellColor = damaged.GetComponentInChildren<CellCenter>();
 
         if (transferred > startVal && damaged.value > 0)
         {
