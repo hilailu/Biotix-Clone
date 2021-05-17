@@ -13,9 +13,8 @@ public class CellManager : MonoBehaviour
     }
     #endregion
 
-  //  public List<Cell> cells = new List<Cell>();
+    public List<Cell> cells = new List<Cell>();
     public List<Cell> selectedCells = new List<Cell>();
-    public List<Cell> botCells = new List<Cell>();
 
     public void Attack2(Cell attacked)
     {

@@ -19,6 +19,7 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public SpriteRenderer selectRing;
 
     [SerializeField] private int maxvalue;
+    public int maxValue { get => maxvalue; private set { value = maxvalue; } }
 
     private CellCenter cellColor;
     private TMP_Text val;
@@ -35,8 +36,8 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         val = GetComponent<TMP_Text>();
         cellColor = GetComponentInChildren<CellCenter>();
 
-        if (this.owner == Owner.Bot)
-            CellManager.instance.botCells.Add(this);
+        //if (this.owner == Owner.Bot)
+        CellManager.instance.cells.Add(this);
 
         ValueText();
         cellColor.SetColor(owner);
@@ -206,12 +207,12 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
         if ((this.owner == Owner.None && this.value > 0) || (this.owner != Owner.None && this.value < 0))
         {
-            if (CellManager.instance.botCells.Contains(this))
-                CellManager.instance.botCells.Remove(this);
+            /*if (CellManager.instance.botCells.Contains(this))
+                CellManager.instance.botCells.Remove(this); */
             this.owner = owner;
             this.cellColor.SetColor(owner);
-            if (this.owner == Owner.Bot && !CellManager.instance.botCells.Contains(this))
-                CellManager.instance.botCells.Add(this);
+            /*if (this.owner == Owner.Bot && !CellManager.instance.botCells.Contains(this))
+                CellManager.instance.botCells.Add(this);*/
         }
     }
 
