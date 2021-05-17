@@ -6,7 +6,7 @@ public class CellCenter : MonoBehaviour
     private SpriteRenderer rend;
     private int level;
 
-    void Awake()
+    private void Awake()
     {
         level = SceneManager.GetActiveScene().buildIndex;
         rend = GetComponent<SpriteRenderer>();

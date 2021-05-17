@@ -1,11 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
-using UnityEngine.UI;
-using System.Linq;
 
 public enum Owner
 {
@@ -24,20 +21,13 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [SerializeField] private int maxvalue;
 
     private CellCenter cellColor;
-
-    private bool isAddCoroutineRunning = false;
-    private bool isRemoveCoroutineRunning = false;
-
     private TMP_Text val;
     private Vector2 startPos;
     private Vector2 endPos;
-
     private Coroutine coAdd, coRem;
 
-    private float UniqueId { get; set; }
-
-    public float GetId()
-        => this.UniqueId;
+    private bool isAddCoroutineRunning = false;
+    private bool isRemoveCoroutineRunning = false;
 
     private void Start()
     {
@@ -45,9 +35,8 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         val = GetComponent<TMP_Text>();
         cellColor = GetComponentInChildren<CellCenter>();
 
-        UniqueId = transform.position.sqrMagnitude;
-
-        CellManager.instance.cells.Add(this);
+        if (this.owner == Owner.Bot)
+            CellManager.instance.botCells.Add(this);
 
         ValueText();
         cellColor.SetColor(owner);
@@ -85,10 +74,19 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     private void ValueText()
     {
-        if (value != 0)
-            val.text = Math.Abs(value).ToString();
-        else
+        if (value == 0)
+        {
             val.text = string.Empty;
+
+            if (this.owner != Owner.None)
+            {
+                this.owner = Owner.None;
+                cellColor.SetColor(this.owner);
+            }
+        }
+        else
+            val.text = Math.Abs(value).ToString();
+       
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -110,13 +108,13 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 item.lineRend.SetPosition(0, new Vector3(item.transform.position.x, item.transform.position.y, 0f));
                 item.lineRend.SetPosition(1, new Vector3(endPos.x, endPos.y, 0f));
             }
-
         }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         var cell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
+
         if (cell != null && cell.owner == Owner.Player)
         {
             cell.selectRing.enabled = true;
@@ -136,13 +134,13 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (startPos != Vector2.zero)
         {
             var cell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
+
             if (cell != null)
             {
                 CellManager.instance.Attack2(cell);
             }
 
             CellManager.instance.Clear();
-            
             Debug.Log("You ended a drag");
         }
     }
@@ -173,29 +171,28 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         }
     }
 
-
     public void Attack(Cell attacked)
     {
-        int transferred = Convert.ToInt32(Math.Floor((float)this.value / 2));
-        int amountOfMiniCells = Convert.ToInt32(Math.Floor((float)transferred / 2));
-
-        this.value -= transferred;
-
-        for (int i = 0; i < amountOfMiniCells; i++)
+        if (this != attacked)
         {
-            Vector3 rand = this.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f), 0);
-            GameObject mc = Instantiate((GameObject)Resources.Load("MiniCell"), rand, Quaternion.identity, this.transform);
-            MiniCell miniCell = mc.GetComponent<MiniCell>();
-            if (i == amountOfMiniCells - 1 && transferred % 2 == 1)
-            {
-                miniCell.value = 3;
-                return;
-            }
-            miniCell.value = 2;
-            miniCell.owner = this.owner;
-            miniCell.Move(attacked);
-        }
+            int transferred = Convert.ToInt32(Math.Floor((float)this.value / 2));
+            int amountOfMiniCells = Convert.ToInt32(Math.Ceiling((float)transferred / 2));
 
+            this.value -= transferred;
+
+            for (int i = 0; i < amountOfMiniCells; i++)
+            {
+                Vector3 rand = this.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f), 0);
+                GameObject mc = Instantiate((GameObject)Resources.Load("MiniCell"), rand, Quaternion.identity, this.transform);
+                MiniCell miniCell = mc.GetComponent<MiniCell>();
+                if (i == amountOfMiniCells - 1 && transferred % 2 == 1)
+                    miniCell.value = 1;
+                else
+                    miniCell.value = 2;
+                miniCell.owner = this.owner;
+                miniCell.Move(attacked);
+            }
+        }
     }
 
     public void IncreaseAmount(Owner owner, int val)
@@ -207,10 +204,14 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         else
             this.value += val;
 
-        if (val > startVal)
+        if ((this.owner == Owner.None && this.value > 0) || (this.owner != Owner.None && this.value < 0))
         {
+            if (CellManager.instance.botCells.Contains(this))
+                CellManager.instance.botCells.Remove(this);
             this.owner = owner;
             this.cellColor.SetColor(owner);
+            if (this.owner == Owner.Bot && !CellManager.instance.botCells.Contains(this))
+                CellManager.instance.botCells.Add(this);
         }
     }
 
@@ -231,10 +232,10 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     private IEnumerator RemoveRoutine()
     {
         isRemoveCoroutineRunning = true;
-        for (int i = value; i > maxvalue; i = i - 2)
+        for (int i = value; i > maxvalue; i -= 2)
         {         
             yield return new WaitForSeconds(1f);
-            value = value - 2;
+            value -= 2;
         }
         isRemoveCoroutineRunning = false;
     }

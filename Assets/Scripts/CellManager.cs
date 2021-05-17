@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class CellManager : MonoBehaviour
 {
@@ -17,51 +13,9 @@ public class CellManager : MonoBehaviour
     }
     #endregion
 
-    public List<Cell> cells = new List<Cell>();
+  //  public List<Cell> cells = new List<Cell>();
     public List<Cell> selectedCells = new List<Cell>();
-
-    [SerializeField] private GameObject miniCell;
-    [SerializeField] private Camera main;
-
-    public void Attack(Owner owner, Cell damaged)
-    {
-        int startVal = damaged.value;
-
-        int transferred = 0;
-
-        foreach (Cell item in selectedCells)
-        {
-            int cellTransfer = Convert.ToInt32(Math.Floor((float)item.value / 2));
-            transferred += cellTransfer;
-            item.value -= cellTransfer;
-        }
-
-        if (damaged.owner == Owner.Bot)
-        {
-            if (transferred >= damaged.value)
-            {
-                var diff = transferred - damaged.value;
-                damaged.value = diff;
-            }
-            else
-                damaged.value -= transferred;
-        }
-        else damaged.value += transferred;
-
-        var cellColor = damaged.GetComponentInChildren<CellCenter>();
-
-        if (transferred > startVal && damaged.value > 0)
-        {
-            damaged.owner = owner;
-            cellColor.SetColor(damaged.owner);
-        }
-
-        if (damaged.value == 0)
-        {
-           damaged.owner = Owner.None;
-           cellColor.SetColor(damaged.owner);
-        }
-    }
+    public List<Cell> botCells = new List<Cell>();
 
     public void Attack2(Cell attacked)
     {
