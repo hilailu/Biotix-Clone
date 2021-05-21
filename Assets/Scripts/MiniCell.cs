@@ -3,9 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(CellCenter))]
 public class MiniCell : MonoBehaviour
 {
-    public int value;
     public Owner owner;
 
+    [SerializeField] private int value;
     private float speed = 1f;
     private Cell to;
     private bool isMoving;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4914232097463618234}
   - component: {fileID: 8154978116608278448}
   - component: {fileID: 6103650578600092393}
+  - component: {fileID: 3365980562295453340}
   m_Layer: 0
   m_Name: MiniCell
   m_TagString: Untagged
@@ -112,4 +113,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bebaa4b3c61f4845b9d10d8072036e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
+  owner: 0
+  value: 1
+--- !u!114 &3365980562295453340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556194048821355951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65760b6ca65fbe942aeac90c68c98cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

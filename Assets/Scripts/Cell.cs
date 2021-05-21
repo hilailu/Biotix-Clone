@@ -36,14 +36,13 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         val = GetComponent<TMP_Text>();
         cellColor = GetComponentInChildren<CellCenter>();
 
-        //if (this.owner == Owner.Bot)
         CellManager.instance.cells.Add(this);
 
         ValueText();
         cellColor.SetColor(owner);
     }
 
-    private void Update()
+    public void CheckValue()
     {
         ValueText();
 
@@ -71,23 +70,20 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 coRem = StartCoroutine(RemoveRoutine());
             }
         }
+
+        else if (owner == Owner.None)
+        {
+            StopAllCoroutines();
+            isAddCoroutineRunning = isRemoveCoroutineRunning = false;
+        }
     }
 
     private void ValueText()
     {
         if (value == 0)
-        {
             val.text = string.Empty;
-
-            if (this.owner != Owner.None)
-            {
-                this.owner = Owner.None;
-                cellColor.SetColor(this.owner);
-            }
-        }
         else
-            val.text = Math.Abs(value).ToString();
-       
+            val.text = Math.Abs(value).ToString();   
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -174,22 +170,24 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void Attack(Cell attacked)
     {
+        if (CellManager.instance.selectedCells.Contains(this) && this.owner != Owner.Player)
+        {
+            CellManager.instance.Clear();
+            return;
+        }
+
         if (this != attacked)
         {
             int transferred = Convert.ToInt32(Math.Floor((float)this.value / 2));
-            int amountOfMiniCells = Convert.ToInt32(Math.Ceiling((float)transferred / 2));
-
             this.value -= transferred;
 
-            for (int i = 0; i < amountOfMiniCells; i++)
+            for (int i = 0; i < transferred; i++)
             {
                 Vector3 rand = this.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f), 0);
                 GameObject mc = Instantiate((GameObject)Resources.Load("MiniCell"), rand, Quaternion.identity, this.transform);
+
                 MiniCell miniCell = mc.GetComponent<MiniCell>();
-                if (i == amountOfMiniCells - 1 && transferred % 2 == 1)
-                    miniCell.value = 1;
-                else
-                    miniCell.value = 2;
+
                 miniCell.owner = this.owner;
                 miniCell.Move(attacked);
             }
@@ -198,36 +196,34 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void IncreaseAmount(Owner owner, int val)
     {
-        var startVal = this.value;
-
         if (this.owner != Owner.None && owner != this.owner)
             this.value -= val;
         else
             this.value += val;
 
+        if (this.value == 0)
+        {
+            this.owner = Owner.None;
+            this.cellColor.SetColor(this.owner);
+        }
+
         if ((this.owner == Owner.None && this.value > 0) || (this.owner != Owner.None && this.value < 0))
         {
-            /*if (CellManager.instance.botCells.Contains(this))
-                CellManager.instance.botCells.Remove(this); */
             this.owner = owner;
             this.cellColor.SetColor(owner);
-            /*if (this.owner == Owner.Bot && !CellManager.instance.botCells.Contains(this))
-                CellManager.instance.botCells.Add(this);*/
+            CellManager.instance.OnOwnerChanged?.Invoke();
         }
     }
 
     private IEnumerator AddRoutine()
     {
-        if (owner != Owner.None)
+        isAddCoroutineRunning = true;
+        for (int i = value; i < maxvalue; i++)
         {
-            isAddCoroutineRunning = true;
-            for (int i = value; i < maxvalue; i++)
-            {               
-                yield return new WaitForSeconds(1f);
-                value++;
-            }
-            isAddCoroutineRunning = false;
+            yield return new WaitForSeconds(1f);
+            value++;
         }
+        isAddCoroutineRunning = false;
     }
 
     private IEnumerator RemoveRoutine()

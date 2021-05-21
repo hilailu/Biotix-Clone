@@ -1,16 +1,12 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CellCenter : MonoBehaviour
 {
     private SpriteRenderer rend;
-    private int level;
+    private Color[] colors = new Color[4] { Color.magenta, Color.red, Color.yellow, Color.green };
 
     private void Awake()
-    {
-        level = SceneManager.GetActiveScene().buildIndex;
-        rend = GetComponent<SpriteRenderer>();
-    }
+        => rend = GetComponent<SpriteRenderer>();
 
     public void SetColor(Owner owner)
     {
@@ -25,21 +21,12 @@ public class CellCenter : MonoBehaviour
                 break;
 
             case Owner.Bot:
-
-                switch (level)
+                if (CellManager.instance.botColor == Color.clear)
                 {
-                    case 1:
-                        rend.color = Color.yellow;
-                        break;
-
-                    case 2:
-                        rend.color = Color.red;
-                        break;
-
-                    case 3:
-                        rend.color = Color.green;
-                        break;
+                    CellManager.instance.botColor = colors[Random.Range(0, colors.Length)];
+                    rend.color = CellManager.instance.botColor;
                 }
+                else rend.color = CellManager.instance.botColor;
                 break;
         }
     }
