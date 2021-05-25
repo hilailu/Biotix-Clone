@@ -25,7 +25,7 @@ public class CellManager : MonoBehaviour
 
     public Color botColor;
 
-    public Action OnOwnerChanged;
+    public Action<Cell> OnOwnerChanged;
 
     public List<Cell> cells = new List<Cell>();
     public List<Cell> selectedCells = new List<Cell>();
@@ -41,26 +41,33 @@ public class CellManager : MonoBehaviour
     private void OnDestroy()
         => OnOwnerChanged -= CheckGameOver;
 
-    private void CheckGameOver()
+    private void CheckGameOver(Cell cellChanged)
     {
+        if (selectedCells.Contains(cellChanged))
+        {
+            selectedCells.Remove(cellChanged);
+            cellChanged.selectRing.enabled = false;
+            cellChanged.lineRend.positionCount = 0;
+            cellChanged.lineRend.positionCount = 2;
+        }
+
         var linqPlayer = cells.Where(w => w.owner == Owner.Player);
+        var linqBot = cells.Where(w => w.owner == Owner.Bot);
+
         if (linqPlayer.Count() == 0)
         {
             endGame.SetActive(true);
             endGame.GetComponentInChildren<TMP_Text>().text = "YOU LOST";
             next.interactable = false;
             am.ShowAd();
-            Debug.Log("Player Lost");
         }
 
-        var linqBot = cells.Where(w => w.owner == Owner.Bot);
-        if (linqBot.Count() == 0)
+        else if (linqBot.Count() == 0)
         {
             endGame.SetActive(true);
             endGame.GetComponentInChildren<TMP_Text>().text = "YOU WON";
             next.interactable = true;
             am.ShowAd();
-            Debug.Log("Bot Lost");
         }
     }
 

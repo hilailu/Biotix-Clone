@@ -5,7 +5,7 @@ public class MiniCell : MonoBehaviour
 {
     public Owner owner;
 
-    [SerializeField] private int value;
+    private int value = 1;
     private float speed = 1f;
     private Cell to;
     private bool isMoving;

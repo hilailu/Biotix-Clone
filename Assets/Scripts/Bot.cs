@@ -23,6 +23,9 @@ public class Bot : MonoBehaviour
             // Bot cells
             var linq = CellManager.instance.cells.Where(w => w.owner == Owner.Bot);
 
+            if (linq == null)
+                break;
+
             // random Bot cell
             var cell = linq.ElementAt(r.Next(0, linq.Count()));
 
@@ -33,7 +36,6 @@ public class Bot : MonoBehaviour
             var target = linqTarget.ElementAt(r.Next(0, linqTarget.Count()));
 
             cell.Attack(target);
-            Debug.Log(cell + " attacking " + target);
         }
     }
 }

@@ -16,7 +16,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         #endif
 
         Advertisement.AddListener(this);
-        Advertisement.Initialize(id, true);
+        Advertisement.Initialize(id);
     }
 
     public void ShowAd()
@@ -32,4 +32,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     public void OnUnityAdsDidStart(string placementId) { }
 
     public void OnUnityAdsReady(string placementId) { }
+
+    private void OnDestroy()
+        => Advertisement.RemoveListener(this);
 }

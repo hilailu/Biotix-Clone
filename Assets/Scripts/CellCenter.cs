@@ -22,11 +22,9 @@ public class CellCenter : MonoBehaviour
 
             case Owner.Bot:
                 if (CellManager.instance.botColor == Color.clear)
-                {
                     CellManager.instance.botColor = colors[Random.Range(0, colors.Length)];
-                    rend.color = CellManager.instance.botColor;
-                }
-                else rend.color = CellManager.instance.botColor;
+
+                rend.color = CellManager.instance.botColor;
                 break;
         }
     }

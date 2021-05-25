@@ -18,8 +18,9 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public LineRenderer lineRend;
     public SpriteRenderer selectRing;
 
-    [SerializeField] private int maxvalue;
     public int maxValue { get => maxvalue; private set { value = maxvalue; } }
+
+    [SerializeField] private int maxvalue;
 
     private CellCenter cellColor;
     private TMP_Text val;
@@ -50,31 +51,37 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {
             if (value == maxvalue) return;
 
-            if (value < maxvalue && !isAddCoroutineRunning)
+            else if (value < maxvalue && !isAddCoroutineRunning)
             {
                 if (coRem != null)
                 {
                     StopCoroutine(coRem);
                     isRemoveCoroutineRunning = false;
+                    coRem = null;
                 }
                 coAdd = StartCoroutine(AddRoutine());
             }
 
-            if (value > maxvalue && !isRemoveCoroutineRunning)
+            else if (value > maxvalue && !isRemoveCoroutineRunning)
             {
                 if (coAdd != null)
                 {
                     StopCoroutine(coAdd);
                     isAddCoroutineRunning = false;
+                    coAdd = null;
                 }
                 coRem = StartCoroutine(RemoveRoutine());
             }
         }
 
-        else if (owner == Owner.None)
+        else 
         {
-            StopAllCoroutines();
-            isAddCoroutineRunning = isRemoveCoroutineRunning = false;
+            if (coAdd != null || coRem != null)
+            {
+                StopAllCoroutines();
+                coAdd = coRem = null;
+                isAddCoroutineRunning = isRemoveCoroutineRunning = false;
+            }
         }
     }
 
@@ -117,11 +124,12 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             cell.selectRing.enabled = true;
             cell.lineRend.positionCount = 2;
             startPos = eventData.pointerCurrentRaycast.worldPosition;
-            Debug.Log("You started dragging. Start pos: " + startPos);
         }
+
         else if (cell != null)
         {
             cell.lineRend.positionCount = 0;
+            cell.lineRend.positionCount = 2;
             startPos = Vector2.zero;
         }
     }
@@ -138,44 +146,43 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             }
 
             CellManager.instance.Clear();
-            Debug.Log("You ended a drag");
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         Cell touchedCell = eventData.pointerCurrentRaycast.gameObject.GetComponent<Cell>();
-        if (touchedCell.owner == Owner.Player)
+
+        if (touchedCell != null)
         {
-            if (!CellManager.instance.selectedCells.Contains(touchedCell))
+            if (touchedCell.owner == Owner.Player)
             {
-                CellManager.instance.selectedCells.Add(touchedCell);
-                touchedCell.selectRing.enabled = true;
-                Debug.Log("Cell selected");
+                // selecting cell
+                if (!CellManager.instance.selectedCells.Contains(touchedCell))
+                {
+                    CellManager.instance.selectedCells.Add(touchedCell);
+                    touchedCell.selectRing.enabled = true;
+                }
+
+                // attacking your own cell
+                else if (CellManager.instance.selectedCells.Contains(touchedCell) && CellManager.instance.selectedCells.Count > 1)
+                {
+                    CellManager.instance.Attack2(touchedCell);
+                    CellManager.instance.Clear();
+                }
             }
-            else if (CellManager.instance.selectedCells.Contains(touchedCell) && CellManager.instance.selectedCells.Count > 1)
+
+            // attacking another's cell
+            else if (touchedCell.owner != Owner.Player && CellManager.instance.selectedCells.Count > 0)
             {
                 CellManager.instance.Attack2(touchedCell);
                 CellManager.instance.Clear();
-                Debug.Log("Attacking your own cell");
             }
-        }
-        if (touchedCell.owner != Owner.Player && CellManager.instance.selectedCells.Count > 0)
-        {
-            CellManager.instance.Attack2(touchedCell);
-            CellManager.instance.Clear();
-            Debug.Log("Attacking different cell");
         }
     }
 
     public void Attack(Cell attacked)
     {
-        if (CellManager.instance.selectedCells.Contains(this) && this.owner != Owner.Player)
-        {
-            CellManager.instance.Clear();
-            return;
-        }
-
         if (this != attacked)
         {
             int transferred = Convert.ToInt32(Math.Floor((float)this.value / 2));
@@ -205,13 +212,14 @@ public class Cell : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {
             this.owner = Owner.None;
             this.cellColor.SetColor(this.owner);
+            CellManager.instance.OnOwnerChanged?.Invoke(this);
         }
 
-        if ((this.owner == Owner.None && this.value > 0) || (this.owner != Owner.None && this.value < 0))
+        else if ((this.owner == Owner.None && this.value > 0) || (this.owner != Owner.None && this.value < 0))
         {
             this.owner = owner;
             this.cellColor.SetColor(owner);
-            CellManager.instance.OnOwnerChanged?.Invoke();
+            CellManager.instance.OnOwnerChanged?.Invoke(this);
         }
     }
 
